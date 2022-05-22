@@ -1,15 +1,8 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import useStore from "../hooks/useStore";
-const Card = styled.div`
-  position: relative;
-  max-width: 200px;
-  margin: 10px;
-  border: 1px solid ${(props) => (props.answered ? "red" : "black")};
-  padding: 10px;
-  border-radius: 5px;
-  background-color: white;
-`;
+import Avatar from "./Avatar";
+
 export const Button = styled.button`
   background-color: white;
   border: 2px solid ${(props) => (props.answered ? "red" : "black")};
@@ -35,20 +28,71 @@ const AnsweredBadge = styled.div`
   border-radius: 5px;
   margin-right: 5px;
 `;
-
+const QuestionLayout = styled.div`
+  position: relative;
+  display: flex;
+  grid-gap: 20px;
+  max-width: 1000px;
+  width: 100%;
+  margin: auto;
+  background-color: #ffffff;
+  padding: 20px;
+`;
+const Votes = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  & > span {
+    font-size: 10px;
+  }
+`;
+const Question = styled(Link)`
+  text-decoration: none;
+  color: #2433ff;
+  font-size: 1.5em;
+  font-weight: 500;
+  margin: 0;
+  padding: 0;
+  text-transform: capitalize;
+  &:hover {
+    color: #091288;
+  }
+`;
+const Author = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+`;
 export const QuestionCard = ({ question }) => {
-  const { author, timestamp, id } = question;
+  const { author, timestamp, id, optionOne, optionTwo } = question;
+  console.log(id);
   const {
-    store: { answers },
+    store: { answers, questions },
   } = useStore();
   return (
-    <Card>
-      <h3>{author}</h3>
-      <small>{new Date(timestamp).toLocaleString()}</small>
-      <Link to={`/questions/${id}`}>
-        <Button>Show</Button>
-      </Link>
-      {answers[id] && <AnsweredBadge color="blue">Answered</AnsweredBadge>}
-    </Card>
+    <QuestionLayout>
+      <Votes>{optionOne.votes.length + optionTwo.votes.length} votes</Votes>
+      <div>
+        <Question to={`/questions/${id}`}>
+          {optionOne.text} <strong>Or</strong> {optionTwo.text}
+        </Question>
+        <Author>
+          <Avatar seed={author} height={"30px"} width={"30px"} />
+          <small>
+            @{author} asks:
+            {new Date(timestamp).toLocaleDateString()}
+          </small>
+        </Author>
+      </div>
+      {answers[id] && (
+        <AnsweredBadge color="green">
+          {questions.some((x) => x === id) ? "Asked" : "Answered"}
+        </AnsweredBadge>
+      )}
+    </QuestionLayout>
   );
 };
