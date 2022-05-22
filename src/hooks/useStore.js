@@ -1,5 +1,10 @@
 import { useSelector } from "react-redux";
-import { setAnswersThunk, loginThunk, logout } from "../redux/reducer";
+import {
+  setAnswersThunk,
+  loginThunk,
+  logout,
+  createQuestionThunk,
+} from "../redux/reducer";
 import useBindActions from "./useBindActions";
 
 export default function useStore() {
@@ -8,6 +13,7 @@ export default function useStore() {
     loginThunk,
     logout,
     setAnswersThunk,
+    createQuestionThunk,
   });
   return { store, ...actions };
 }
