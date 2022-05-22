@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Navigate, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import { ProtectedRoute } from "./pages/ProtectedRoutes";
+import QuestionList from "./pages/QuestionsList";
+import Question from "./components/Question";
+import Navbar from "./components/Navbar";
+import NewPoll from "./pages/NewPoll";
+import Leaderboard from "./pages/Leaderboard";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Routes>
+      <Route path="/login" index element={<Login />} />
+      {/* protected routes */}
+      <Route element={<ProtectedRoute />}>
+        {/* Dashboard layout */}
+        <Route element={<Navbar />}>
+          <Route path="/questions" element={<QuestionList />} />
+          <Route path="/questions/:id" element={<Question />} />
+          <Route path="/leader" element={<Leaderboard />} />
+          <Route path="/new" element={<NewPoll />} />
+        </Route>
+        <Route path="/" element={<Navigate to={"/questions"} />} />
+        <Route path="*" element={<h1>404</h1>} />
+      </Route>
+    </Routes>
   );
 }
 
