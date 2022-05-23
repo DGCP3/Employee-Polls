@@ -30,17 +30,9 @@ export const __postQuestion = async (question) => {
   return await fetcher(`${url}/questions`, "POST", question);
 };
 
-export const __postAnswer = async (answer) => {
-  return await fetcher(`${url}/answers`, "POST", answer);
-};
-
 export const __patchUser = async (id, data) => {
   return await fetcher(`${url}/users/${id}`, "PATCH", data);
 };
 export const __patchQuestion = async (id, data) => {
   return await fetcher(`${url}/questions/${id}`, "PATCH", data);
-};
-
-export const __patchAnswer = async (id, data) => {
-  return await fetcher(`${url}/answers/${id}`, "PATCH", data);
 };
