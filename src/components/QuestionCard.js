@@ -16,6 +16,7 @@ export const Button = styled.button`
     background-color: #f0f0f0;
   }
 `;
+
 const AnsweredBadge = styled.div`
   margin: 5px;
   position: absolute;
@@ -28,6 +29,7 @@ const AnsweredBadge = styled.div`
   border-radius: 5px;
   margin-right: 5px;
 `;
+
 const QuestionLayout = styled.div`
   position: relative;
   display: flex;
@@ -38,27 +40,29 @@ const QuestionLayout = styled.div`
   background-color: #ffffff;
   padding: 20px;
 `;
+
 const Votes = styled.div`
   display: flex;
+  flex-basis: 25px;
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  & > span {
-    font-size: 10px;
-  }
 `;
+
 const Question = styled(Link)`
   text-decoration: none;
   color: #2433ff;
   font-size: 1.5em;
   font-weight: 500;
-  margin: 0;
-  padding: 0;
+  /* margin: 0;
+  padding: 0; */
+
   text-transform: capitalize;
   &:hover {
     color: #091288;
   }
 `;
+
 const Author = styled.div`
   display: flex;
   align-items: center;
@@ -67,15 +71,15 @@ const Author = styled.div`
   margin: 0;
   padding: 0;
 `;
+
 export const QuestionCard = ({ question }) => {
   const { author, timestamp, id, optionOne, optionTwo } = question;
-  console.log(id);
   const {
     store: { answers, questions },
   } = useStore();
   return (
     <QuestionLayout>
-      <Votes>{optionOne.votes.length + optionTwo.votes.length} votes</Votes>
+      <Votes>{optionOne.votes.length + optionTwo.votes.length} Votes</Votes>
       <div>
         <Question to={`/questions/${id}`}>
           {optionOne.text} <strong>Or</strong> {optionTwo.text}
@@ -83,8 +87,7 @@ export const QuestionCard = ({ question }) => {
         <Author>
           <Avatar seed={author} height={"30px"} width={"30px"} />
           <small>
-            @{author} asks:
-            {new Date(timestamp).toLocaleDateString()}
+            @{author} asked at: {new Date(timestamp).toLocaleDateString()}
           </small>
         </Author>
       </div>

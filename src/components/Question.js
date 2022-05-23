@@ -7,7 +7,7 @@ import useStore from "../hooks/useStore";
 import Result from "./Result";
 import { __getQuestion } from "../mock-api/api";
 
-export const Avatar = styled.div`
+export const Img = styled.div`
   display: flex;
   height: 100px;
   width: 400px;
@@ -21,32 +21,33 @@ export const Avatar = styled.div`
 `;
 
 const Question = () => {
-  const { id } = useParams();
+  const { id: bookId } = useParams();
   const {
     store: { answers },
     setAnswersThunk,
   } = useStore();
+
   const [question, setQuestion] = useState(null);
-  const [choice, setChoice] = useState(answers?.[id]);
-  console.log(answers?.[id]);
+  const [choice, setChoice] = useState(answers?.[bookId]);
+
   const onchange = (e) => {
     setChoice(e.target.value);
   };
 
   useEffect(() => {
-    __getQuestion(id).then((q) => setQuestion(q));
-  }, [answers?.[id], id]);
+    __getQuestion(bookId).then((book) => setQuestion(book));
+  }, [answers?.[bookId], bookId]);
 
   const answer = (e) => {
     e.preventDefault();
-    setAnswersThunk({ [id]: choice });
+    setAnswersThunk({ [bookId]: choice });
   };
 
   return (
     <div>
       {question && (
         <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-          <Avatar>
+          <Img>
             <img
               src={`data:image/svg+xml;utf8,${encodeURIComponent(
                 multiavatar(question.author)
@@ -54,7 +55,7 @@ const Question = () => {
               alt="avatar"
             />
             <h1>{question.author} asks:</h1>
-          </Avatar>
+          </Img>
 
           <h2>Would you rather</h2>
 
@@ -79,7 +80,7 @@ const Question = () => {
               onChange={onchange}
             />
             <label htmlFor="optionTwo">{question.optionTwo.text}</label>
-            <Button disabled={!choice || answers?.[id] === choice}>
+            <Button disabled={!choice || answers?.[bookId] === choice}>
               Submit
             </Button>
           </form>
