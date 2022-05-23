@@ -1,6 +1,5 @@
 import {
   __getQuestion,
-  __getQuestions,
   __getUser,
   __getUsers,
   __patchQuestion,
@@ -21,13 +20,9 @@ export const _createQuestion = async (_options, _author) => {
     author: _author,
   });
   const res = await __postQuestion(formattedQuestion);
+  const user = await __getUser(_author);
+  await __patchUser(user.id, { questions: [...user.questions, res.id] });
   return res;
-};
-
-export const _getQuestions = async () => {
-  const res = await __getQuestions();
-  if (res) return res;
-  return { error: "could not get questions" };
 };
 
 export const _answerQuestion = async (_userId, _answers, _qid) => {
@@ -58,7 +53,6 @@ export const _getLeaderboard = async () => {
     return {
       id: user.id,
       name: user.name,
-      avatarURL: user.avatarURL,
       answers: Object.keys(user.answers).length,
       questions: user.questions.length,
     };
