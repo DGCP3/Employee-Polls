@@ -17,12 +17,9 @@ export const Button = styled.button`
   }
 `;
 
-const AnsweredBadge = styled.div`
+const Badge = styled.div`
   margin: 5px;
-  position: absolute;
   font-size: 10px;
-  top: 0;
-  right: 0;
   background-color: ${(props) => props.color || "red"};
   color: white;
   padding: 5px;
@@ -54,9 +51,6 @@ const Question = styled(Link)`
   color: #2433ff;
   font-size: 1.5em;
   font-weight: 500;
-  /* margin: 0;
-  padding: 0; */
-
   text-transform: capitalize;
   &:hover {
     color: #091288;
@@ -70,6 +64,17 @@ const Author = styled.div`
   font-size: 1em;
   margin: 0;
   padding: 0;
+`;
+const BadgeWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1em;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 `;
 
 export const QuestionCard = ({ question }) => {
@@ -91,11 +96,10 @@ export const QuestionCard = ({ question }) => {
           </small>
         </Author>
       </div>
-      {answers[id] && (
-        <AnsweredBadge color="green">
-          {questions.some((x) => x === id) ? "Asked" : "Answered"}
-        </AnsweredBadge>
-      )}
+      <BadgeWrapper>
+        {answers[id] && <Badge color="Blue">Answered</Badge>}
+        {questions.some((x) => x === id) && <Badge color="green">Asked</Badge>}
+      </BadgeWrapper>
     </QuestionLayout>
   );
 };

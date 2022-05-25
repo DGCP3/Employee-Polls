@@ -1,23 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import multiavatar from "@multiavatar/multiavatar/esm";
 import styled from "styled-components";
 import { Button } from "./QuestionCard";
 import useStore from "../hooks/useStore";
 import Result from "./Result";
 import { __getQuestion } from "../mock-api/api";
 
-export const Img = styled.div`
-  display: flex;
-  height: 100px;
-  width: 400px;
-  padding: 10px;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  & > img {
-    width: 20%;
-  }
+const Container = styled.div`
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 `;
 
 const Question = () => {
@@ -44,21 +37,10 @@ const Question = () => {
   };
 
   return (
-    <div>
+    <Container>
       {question && (
-        <div style={{ display: "flex", gap: "20px", alignItems: "center" }}>
-          <Img>
-            <img
-              src={`data:image/svg+xml;utf8,${encodeURIComponent(
-                multiavatar(question.author)
-              )}`}
-              alt="avatar"
-            />
-            <h1>{question.author} asks:</h1>
-          </Img>
-
+        <div>
           <h2>Would you rather</h2>
-
           <form onSubmit={answer}>
             <input
               style={{ display: "inline" }}
@@ -87,7 +69,7 @@ const Question = () => {
         </div>
       )}
       {question && <Result question={question} />}
-    </div>
+    </Container>
   );
 };
 

@@ -2,8 +2,19 @@ import { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { Button } from "../components/QuestionCard";
 import useStore from "../hooks/useStore";
-import { Form, Input } from "./NewPoll";
-
+import { Input } from "./NewPoll";
+import styled from "styled-components";
+const Layout = styled.div`
+  display: grid;
+  place-content: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: #f0f0f0;
+`;
+const LoginForm = styled.form`
+  background-color: #fff;
+  padding: 30px 25px;
+`;
 export default function Login() {
   const [form, setForm] = useState({
     username: "zoshikanlu",
@@ -29,11 +40,11 @@ export default function Login() {
 
   if (isAuth) return <Navigate to={from} replace />;
   return (
-    <div style={{ width: 500, padding: 20 }}>
-      <h1>Login</h1>
-      <Form onSubmit={login}>
-        <label htmlFor="email">Email</label>
+    <Layout>
+      <LoginForm onSubmit={login}>
+        <label htmlFor="username">Username:</label>
         <Input
+          data-testid="username"
           onChange={onchange}
           name="username"
           value={form.username}
@@ -41,8 +52,9 @@ export default function Login() {
           id="email"
           required
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Password:</label>
         <Input
+          data-testid="password"
           type="password"
           name="password"
           onChange={onchange}
@@ -51,7 +63,7 @@ export default function Login() {
           required
         />
         <Button disabled={loading}>{loading ? "Processing" : "Login"}</Button>
-      </Form>
-    </div>
+      </LoginForm>
+    </Layout>
   );
 }
