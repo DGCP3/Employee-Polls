@@ -1,7 +1,7 @@
 import { _createQuestion, _answerQuestion, _loginUser } from "../mock-api";
-const SET_LOADING = "LOGIN_REQUEST";
-const LOGIN_SUCCESS = "LOGIN_SUCCESS";
-const LOGIN_FAILURE = "LOGIN_FAILURE";
+const SET_LOADING = "SET_LOADING";
+const SET_USER = "SET_USER";
+const SET_ERROR = "SET_ERROR";
 const LOG_OUT = "LOG_OUT";
 const SET_QUESTIONS = "SET_QUESTIONS";
 const SET_ANSWERS = "SET_ANSWERS";
@@ -23,14 +23,14 @@ export const reducer = (state = initialState, action) => {
         loading: true,
         error: null,
       };
-    case LOGIN_SUCCESS:
+    case SET_USER:
       return {
         ...state,
         loading: false,
         isAuth: true,
         user: action.payload,
       };
-    case LOGIN_FAILURE:
+    case SET_ERROR:
       return {
         ...state,
         loading: false,
@@ -65,9 +65,9 @@ export const reducer = (state = initialState, action) => {
 };
 // action creator functions
 const setLoading = () => ({ type: SET_LOADING });
-const loginSuccess = (payload) => ({ type: LOGIN_SUCCESS, payload });
+const loginSuccess = (payload) => ({ type: SET_USER, payload });
 const loginFailure = (payload) => ({
-  type: LOGIN_FAILURE,
+  type: SET_ERROR,
   payload,
 });
 export const logout = () => ({
@@ -108,7 +108,6 @@ export const createQuestionThunk = (options) => {
         user: { id },
       } = getState();
       const response = await _createQuestion(options, id);
-      console.log(response);
       dispatch(setQuestions([response.id]));
     } catch (error) {
       console.error(error);
