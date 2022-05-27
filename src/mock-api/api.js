@@ -19,10 +19,11 @@ export const __getUser = async (id) => {
 };
 
 export const __getQuestions = async () => {
-  return await fetcher(`${url}/questions`);
+  return await fetcher(`${url}/questions?_sort=timestamp&_order=desc`);
 };
 
 export const __getQuestion = async (id) => {
+  if (!id) return Promise.reject(new Error("Invalid id"));
   return await fetcher(`${url}/questions/${id}`);
 };
 
