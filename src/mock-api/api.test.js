@@ -64,24 +64,25 @@ describe("API", () => {
     });
   });
   describe("getQuestions", () => {
-    it("should return an array of questions", async () => {
+    it("should return an array of questions", () => {
       fetchMock.mockResponseOnce(JSON.stringify([].fill(mockQuestion, 0, 10)));
-      const questions = await __getQuestions();
-      expect(questions).toEqual([].fill(mockQuestion, 0, 10));
+      return expect(__getQuestions()).resolves.toEqual(
+        [].fill(mockQuestion, 0, 10)
+      );
     });
   });
   describe("getQuestion", () => {
-    it("should return a question", async () => {
+    it("should return a question", () => {
       fetchMock.mockResponseOnce(() =>
         Promise.resolve(JSON.stringify(mockQuestion))
       );
-      await expect(__getQuestion("8xf0y6ziyjabvozdd253nd")).resolves.toEqual(
+      return expect(__getQuestion("8xf0y6ziyjabvozdd253nd")).resolves.toEqual(
         mockQuestion
       );
     });
-    it("should return an error if the id is not provided", async () => {
+    it("should return an error if the id is not provided", () => {
       fetchMock.mockResponseOnce(() => Promise.reject(new Error("Invalid id")));
-      await expect(__getQuestion()).rejects.toThrow();
+      return expect(__getQuestion()).rejects.toThrow();
     });
   });
 });
