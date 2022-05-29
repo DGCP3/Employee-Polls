@@ -47,7 +47,7 @@ Start the mock api server
   npm run server
 ```
 
-or
+or start both
 ```bash
 npm run start-server
 ```
