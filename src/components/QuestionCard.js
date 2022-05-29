@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import useStore from "../hooks/useStore";
+import useReduxStore from "../hooks/useStore";
 import Avatar from "./Avatar";
 
 export const Button = styled.button`
@@ -81,7 +81,7 @@ export const QuestionCard = ({ question }) => {
   const { author, timestamp, id, optionOne, optionTwo } = question;
   const {
     store: { answers, questions },
-  } = useStore();
+  } = useReduxStore();
   return (
     <QuestionLayout>
       <Votes>{optionOne.votes.length + optionTwo.votes.length} Votes</Votes>

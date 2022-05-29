@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Button } from "./QuestionCard";
-import useStore from "../hooks/useStore";
+import useReduxStore from "../hooks/useStore";
 import Result from "./Result";
 import { __getQuestion } from "../mock-api/api";
 
@@ -18,7 +18,7 @@ const Question = () => {
   const {
     store: { answers },
     setAnswersThunk,
-  } = useStore();
+  } = useReduxStore();
 
   const [question, setQuestion] = useState(null);
   const [choice, setChoice] = useState(answers?.[bookId]);

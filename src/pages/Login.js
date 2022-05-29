@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { Button } from "../components/QuestionCard";
-import useStore from "../hooks/useStore";
+import useReduxStore from "../hooks/useStore";
 import { Input } from "./NewPoll";
 import styled from "styled-components";
 const Layout = styled.div`
@@ -24,7 +24,7 @@ export default function Login() {
   const {
     store: { isAuth, loading },
     loginThunk,
-  } = useStore();
+  } = useReduxStore();
 
   let location = useLocation();
   let from = location.state?.from?.pathname || "/questions";
@@ -41,7 +41,7 @@ export default function Login() {
   if (isAuth) return <Navigate to={from} replace />;
   return (
     <Layout>
-      <LoginForm onSubmit={login}>
+      <LoginForm onSubmit={login} data-testid="loginForm">
         <label htmlFor="username">Username:</label>
         <Input
           data-testid="username"

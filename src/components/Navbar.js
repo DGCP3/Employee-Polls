@@ -2,7 +2,7 @@ import multiavatar from "@multiavatar/multiavatar";
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
-import useStore from "../hooks/useStore";
+import useReduxStore from "../hooks/useStore";
 import Avatar from "./Avatar";
 
 const HeaderElement = styled.header`
@@ -60,7 +60,7 @@ export default function Navbar() {
       user: { name, id },
     },
     logout,
-  } = useStore();
+  } = useReduxStore();
 
   const links = [
     { to: "/questions", label: "Home" },

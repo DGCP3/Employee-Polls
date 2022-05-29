@@ -7,7 +7,7 @@ import {
 } from "../redux/reducer";
 import useBindActions from "./useBindActions";
 
-export default function useStore() {
+export default function useReduxStore() {
   const store = useSelector((store) => store);
   const actions = useBindActions({
     loginThunk,
