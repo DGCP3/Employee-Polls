@@ -1,6 +1,10 @@
 
 # Employee Polls
 
+**login info**  
+**Username**: zoshikanlu  
+**Password**: pass246
+
 
 
 ## Features
@@ -9,6 +13,7 @@
 - Create a poll
 - Vote on a poll
 - display leaderboard
+
 
 
 ## Run Locally
