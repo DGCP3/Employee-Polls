@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Login Login 1`] = `
+exports[`Login component should render 1`] = `
 <div>
   <div
     class="sc-kDDrLX flYHzi"
+    data-testid="loginPage"
   >
     <form
       class="sc-iqcoie bDXuGN"
@@ -39,53 +40,7 @@ exports[`Login Login 1`] = `
       />
       <button
         class="sc-gsnTZi jtOEId"
-      >
-        Login
-      </button>
-    </form>
-  </div>
-</div>
-`;
-
-exports[`Login component Login 1`] = `
-<div>
-  <div
-    class="sc-kDDrLX flYHzi"
-  >
-    <form
-      class="sc-iqcoie bDXuGN"
-      data-testid="loginForm"
-    >
-      <label
-        for="username"
-      >
-        Username:
-      </label>
-      <input
-        class="sc-papXJ fixUxh"
-        data-testid="username"
-        id="email"
-        name="username"
-        required=""
-        type="text"
-        value="zoshikanlu"
-      />
-      <label
-        for="password"
-      >
-        Password:
-      </label>
-      <input
-        class="sc-papXJ fixUxh"
-        data-testid="password"
-        id="password"
-        name="password"
-        required=""
-        type="password"
-        value="pass246"
-      />
-      <button
-        class="sc-gsnTZi jtOEId"
+        data-testid="loginButton"
       >
         Login
       </button>
