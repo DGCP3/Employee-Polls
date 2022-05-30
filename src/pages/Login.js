@@ -4,6 +4,7 @@ import { Button } from "../components/QuestionCard";
 import useReduxStore from "../hooks/useStore";
 import { Input } from "./NewPoll";
 import styled from "styled-components";
+import useForm from "../hooks/useForm";
 const Layout = styled.div`
   display: grid;
   place-content: center;
@@ -16,11 +17,10 @@ const LoginForm = styled.form`
   padding: 30px 25px;
 `;
 export default function Login() {
-  const [form, setForm] = useState({
+  const [form, onchange] = useForm({
     username: "zoshikanlu",
     password: "pass246",
   });
-
   const {
     store: { isAuth, loading },
     loginThunk,
@@ -34,13 +34,10 @@ export default function Login() {
     loginThunk(form.username, form.password);
   }
 
-  function onchange(e) {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  }
-
   if (isAuth) return <Navigate to={from} replace />;
+
   return (
-    <Layout>
+    <Layout data-testid="loginPage">
       <LoginForm onSubmit={login} data-testid="loginForm">
         <label htmlFor="username">Username:</label>
         <Input
@@ -62,7 +59,9 @@ export default function Login() {
           value={form.password}
           required
         />
-        <Button disabled={loading}>{loading ? "Processing" : "Login"}</Button>
+        <Button data-testid="loginButton" disabled={loading}>
+          {loading ? "Processing" : "Login"}
+        </Button>
       </LoginForm>
     </Layout>
   );

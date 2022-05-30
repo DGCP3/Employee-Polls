@@ -2,6 +2,7 @@ import { Button } from "../components/QuestionCard";
 import styled from "styled-components";
 import { useState } from "react";
 import useReduxStore from "../hooks/useStore";
+import useForm from "../hooks/useForm";
 export const Form = styled.form`
   border: 2px solid black;
   padding: 20px;
@@ -17,21 +18,17 @@ export const Input = styled.input`
 export const Confirmation = styled.dialog``;
 
 export default function NewPoll() {
-  const [form, setForm] = useState({
+  const [form, onchange, reset] = useForm({
     optionOne: "",
     optionTwo: "",
   });
 
   const { createQuestionThunk } = useReduxStore();
 
-  const onchange = (e) => {
-    setForm((pre) => ({ ...pre, [e.target.name]: e.target.value }));
-  };
-
   const createPoll = (e) => {
     e.preventDefault();
     createQuestionThunk(form);
-    setForm({
+    reset({
       optionOne: "",
       optionTwo: "",
     });
