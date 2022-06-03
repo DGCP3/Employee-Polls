@@ -1,13 +1,21 @@
 import PropTypes from "prop-types";
 import { StyledButton } from "./styled";
 
-const Button = ({ children, color, bg, fontSize, loading, height }) => {
+const Button = ({
+  children,
+  color,
+  bg,
+  fontSize,
+  loading,
+  disabled,
+  height,
+}) => {
   return (
     <StyledButton
       color={color}
       background={bg}
       fontSize={fontSize}
-      disabled={loading && true}
+      disabled={(loading && true) || disabled}
       height={height}
     >
       {loading ? "Loading..." : children}
