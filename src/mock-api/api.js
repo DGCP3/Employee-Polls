@@ -1,11 +1,13 @@
 export const url = "http://localhost:3001";
-
+const headers = {
+  headers: {
+    "Content-Type": "application/json",
+  },
+};
 const fetcher = async (url, method = "GET", data) => {
   return await fetch(url, {
     method,
-    headers: {
-      "Content-Type": "application/json",
-    },
+    ...headers,
     body: JSON.stringify(data),
   }).then((res) => res.json());
 };
@@ -15,6 +17,7 @@ export const __getUsers = async () => {
 };
 
 export const __getUser = async (id) => {
+  if (!id) return Promise.reject(new Error("Invalid id"));
   return await fetcher(`${url}/users/${id}`);
 };
 
@@ -28,12 +31,15 @@ export const __getQuestion = async (id) => {
 };
 
 export const __postQuestion = async (question) => {
+  if (!question) return Promise.reject(new Error("Invalid id"));
   return await fetcher(`${url}/questions`, "POST", question);
 };
 
 export const __patchUser = async (id, data) => {
+  if (!id || !data) return Promise.reject(new Error("Invalid id"));
   return await fetcher(`${url}/users/${id}`, "PATCH", data);
 };
 export const __patchQuestion = async (id, data) => {
+  if (!id || !data) return Promise.reject(new Error("Invalid id"));
   return await fetcher(`${url}/questions/${id}`, "PATCH", data);
 };
