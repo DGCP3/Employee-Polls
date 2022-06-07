@@ -12,28 +12,21 @@ const Label = styled.label`
   color: #0c0938ca;
   background-color: #f7fff7;
   padding: 20px;
-  padding-left: 30px;
   border-radius: 3px;
   margin-block: 10px;
   text-transform: capitalize;
   ${Radio}:checked + & {
-    color: #0c0938;
     font-weight: bold;
     font-size: 1.7rem;
-    border-left: ${(prop) => prop.optColor};
-    border-left-width: 20px;
-    border-left-style: solid;
-    /* text-decoration: underline 4px solid #9c321f;
-    text-underline-position: under; */
+    /* border-left-style: solid; */
   }
   ${Radio}:checked + &::before {
-    content: "";
+    content: "☑️";
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 10px;
     z-index: 999;
-    width: 30px;
-    background-color: ${(prop) => prop.optColor};
   }
 `;
 
