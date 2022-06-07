@@ -4,9 +4,6 @@
   "private": true,
   "dependencies": {
     "@multiavatar/multiavatar": "^1.0.7",
-    "@testing-library/jest-dom": "^5.16.4",
-    "@testing-library/react": "^13.2.0",
-    "@testing-library/user-event": "^13.2.1",
     "@types/jest": "^27.5.1",
     "concurrently": "^7.2.1",
     "json-server": "^0.17.0",
@@ -50,6 +47,9 @@
   "devDependencies": {
     "@testing-library/react-hooks": "^8.0.0",
     "jest": "^28.1.0",
-    "jest-fetch-mock": "^3.0.3"
+    "jest-fetch-mock": "^3.0.3",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "^13.2.0",
+    "@testing-library/user-event": "^13.2.1"
   }
 }
