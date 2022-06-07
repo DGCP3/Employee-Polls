@@ -1,10 +1,19 @@
+import multiavatar from "@multiavatar/multiavatar";
 import PropTypes from "prop-types";
-import { AuthorStyle } from "./style";
+import { AuthorStyle, Avatar } from "./style";
 
-export default function Author({ name, timestamp, color, fontSize }) {
+export default function Author({ name, timestamp, color, fontSize, seed }) {
   return (
     <AuthorStyle color={color} fontSize={fontSize}>
-      By @{name} asked at: {new Date(timestamp).toLocaleDateString()}
+      {seed && (
+        <Avatar
+          fontSize={"0.1rem"}
+          src={`data:image/svg+xml;utf8,${encodeURIComponent(
+            multiavatar(seed)
+          )}`}
+        />
+      )}
+      @{name} at: {new Date(timestamp).toLocaleDateString()}
     </AuthorStyle>
   );
 }
@@ -12,4 +21,5 @@ Author.prototype = {
   name: PropTypes.string.isRequired,
   timestamp: PropTypes.string.isRequired,
   color: PropTypes.string,
+  fontSize: PropTypes.string,
 };
