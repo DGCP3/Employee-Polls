@@ -10,7 +10,7 @@ const MenuContainer = styled.div`
   color: #0e3a5ec8;
   background-color: #f7fff7;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
-  height: 300px;
+  height: fit-content;
   width: 250px;
   border-radius: 3px;
   text-align: left;
