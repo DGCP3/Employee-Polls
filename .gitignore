@@ -22,3 +22,6 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 /.vscode
+/src/services
+__snapshots__/
+/src/mock-api/db.json
