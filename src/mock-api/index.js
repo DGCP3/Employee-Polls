@@ -6,10 +6,11 @@ import {
   __patchUser,
   __postQuestion,
 } from "./api";
+
 export const _loginUser = async (_username, _password) => {
   const res = await __getUser(_username);
   if (!res || res.password !== _password)
-    return { error: "email or password is incorrect" };
+    throw Error({ error: "email or password is incorrect" });
   return res;
 };
 

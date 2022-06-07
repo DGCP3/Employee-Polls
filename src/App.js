@@ -1,30 +1,30 @@
 import "./App.css";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Login from "./pages/Login";
-import { ProtectedRoute } from "./pages/ProtectedRoutes";
-import QuestionList from "./pages/QuestionsList";
-import Question from "./components/Question";
-import Navbar from "./components/Navbar";
-import NewPoll from "./pages/NewPoll";
-import Leaderboard from "./pages/Leaderboard";
+import { ProtectedRoute } from "./routes/ProtectedRoutes";
+import MainLayout from "./routes/MainLayout";
+import LoginPage from "./routes/LoginPage";
+import NewPoll from "./routes/NewPollPage";
+import QuestionPage from "./routes/QuestionPage";
+import Leaderboard from "./routes/LeaderboardPage";
+import QuestionsPage from "./routes/QuestionsPage";
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" index element={<Login />} />
-      {/* protected routes */}
-      <Route element={<ProtectedRoute />}>
-        {/* Dashboard layout */}
-        <Route element={<Navbar />}>
-          <Route path="/questions" element={<QuestionList />} />
-          <Route path="/questions/:id" element={<Question />} />
-          <Route path="/leader" element={<Leaderboard />} />
-          <Route path="/new" element={<NewPoll />} />
+    <div>
+      <Routes>
+        <Route path="/login" index element={<LoginPage />} />
+        <Route element={<ProtectedRoute />}>
+          <Route element={<MainLayout />}>
+            <Route path="/questions" element={<QuestionsPage />} />
+            <Route path="/questions/:question_id" element={<QuestionPage />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+            <Route path="/add" element={<NewPoll />} />
+            <Route path="*" element={<h1>404</h1>} />
+          </Route>
+          <Route path="/" element={<Navigate to={"/questions"} />} />
         </Route>
-        <Route path="/" element={<Navigate to={"/questions"} />} />
-        <Route path="*" element={<h1>404</h1>} />
-      </Route>
-    </Routes>
+      </Routes>
+    </div>
   );
 }
 
