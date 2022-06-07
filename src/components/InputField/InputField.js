@@ -12,6 +12,7 @@ const InputField = ({
   height,
   marginBlock,
   marginInline,
+  ...rest
 }) => {
   return (
     <>
@@ -25,6 +26,7 @@ const InputField = ({
           type={type}
           height={height}
           marginInline={marginInline}
+          {...rest}
         />
       </Label>
     </>
