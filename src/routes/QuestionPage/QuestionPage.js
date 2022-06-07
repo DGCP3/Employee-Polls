@@ -1,47 +1,54 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Author from "../../components/Author";
 import Button from "../../components/Button";
 import InputRadio from "../../components/InputRadio";
 import Result from "../../components/Result";
-import useReduxStore from "../../hooks/useStore";
+import useReduxStore from "../../hooks/useReduxStore";
 import { __getQuestion } from "../../mock-api/api";
-import { Container, VoteCounted } from "./style";
-
-export default function QuestionPage({ questionId }) {
-  const { id: bookId } = useParams();
+import { Container, Flex, Heading, VoteCounted } from "./style";
+export default function QuestionPage() {
+  const { question_id } = useParams();
+  const navigate = useNavigate();
   const {
-    store: { answers },
-    setAnswersThunk,
+    store: {
+      QA: { answers },
+    },
+    answersQuestion,
   } = useReduxStore();
 
   const [question, setQuestion] = useState(null);
-  const [choice, setChoice] = useState(answers?.[bookId]);
+  const [choice, setChoice] = useState(answers?.[question_id]);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     setChoice(e.target.value);
   };
 
-  useEffect(() => {
-    __getQuestion(bookId).then((book) => setQuestion(book));
-  }, [answers?.[bookId], bookId]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
-    setAnswersThunk({ [bookId]: choice });
+    answersQuestion({ [question_id]: choice });
   };
+
+  useEffect(() => {
+    __getQuestion(question_id).then((book) => {
+      if (Object.keys(book).length === 0) navigate("/questions");
+      setQuestion(book);
+    });
+  }, [answers.question_id, navigate, question_id]);
 
   return (
     question && (
       <Container>
-        <Author
-          name={question.author}
-          timestamp={question.timestamp}
-          color="white"
-          fontSize={"1.2rem"}
-        />
-        <h1>Would you rather</h1>
+        <Flex>
+          <Heading>Would you rather</Heading>
+          <Author
+            name={question.author}
+            timestamp={question.timestamp}
+            color="white"
+            fontSize={"1.2rem"}
+            seed={question.author}
+          />
+        </Flex>
         <form onSubmit={handleSubmit}>
           <InputRadio
             label={question.optionOne.text}
@@ -65,14 +72,14 @@ export default function QuestionPage({ questionId }) {
           <Button
             height={"60px"}
             fontSize="1.5rem"
-            disabled={!choice || answers?.[bookId] === choice}
+            disabled={!choice || answers?.[question_id] === choice}
           >
             Vote
           </Button>
         </form>
         <VoteCounted>
-          {question.optionOne.votes.length + question.optionTwo.votes.length}{" "}
-          people voted so far
+          Votes so far:{" "}
+          {question.optionOne.votes.length + question.optionTwo.votes.length}
           <Result question={question} />
         </VoteCounted>
       </Container>
