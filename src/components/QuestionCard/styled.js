@@ -7,17 +7,19 @@ const flex = styled.div`
   align-items: center;
 `;
 const QuestionContainer = styled(flex)`
+  position: relative;
   width: 100%;
   height: 100%;
+  max-height: 150px;
   justify-content: flex-start;
-  background-color: #f7fff7;
+  background-color: #ffffff;
 `;
 const Votes = styled(flex)`
   font-family: "DM Mono";
   text-align: center;
   color: #ffffff;
   width: 65px;
-  padding: 10px;
+  padding-inline: 10px;
   height: 100%;
   background-color: ${(props) => props.bgColor || "#386083"};
   span {
@@ -34,8 +36,8 @@ const Question = styled(Link)`
   padding: 1.3rem 1.5rem;
   align-items: start;
   flex-direction: column;
-  flex-basis: 90%;
-
+  height: fit-content;
+  /* flex-basis: 90%; */
   p {
     font-size: 1.5rem;
     font-weight: bold;
@@ -44,4 +46,24 @@ const Question = styled(Link)`
   }
 `;
 
-export { QuestionContainer, Votes, Question };
+const BadgeContainer = styled(flex)`
+  border-radius: 10px;
+  position: absolute;
+  /* gap: 10px; */
+  top: -20px;
+  right: 0;
+  padding: 0.5rem;
+  border-radius: 5px;
+  font-weight: bold;
+  border: 1px solid #ffffff;
+`;
+
+const Badge = styled.span`
+  font-weight: normal;
+  color: #000000;
+  background-color: #ffffff;
+  padding: 5px 10px;
+  font-size: 9px !important;
+`;
+
+export { QuestionContainer, Votes, Question, Badge, BadgeContainer };
