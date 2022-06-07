@@ -9,6 +9,10 @@ const Button = ({
   loading,
   disabled,
   height,
+  width,
+  margin,
+  padding,
+  ...rest
 }) => {
   return (
     <StyledButton
@@ -17,6 +21,10 @@ const Button = ({
       fontSize={fontSize}
       disabled={(loading && true) || disabled}
       height={height}
+      margin={margin}
+      width={width}
+      padding={padding}
+      {...rest}
     >
       {loading ? "Loading..." : children}
     </StyledButton>
@@ -28,6 +36,9 @@ Button.protoTypes = {
   bg: PropTypes.string,
   fontSize: PropTypes.string,
   loading: PropTypes.bool,
+  margin: PropTypes.string,
+  padding: PropTypes.string,
+  width: PropTypes.string,
 };
 
 export default Button;
