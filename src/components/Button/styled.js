@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 const StyledButton = styled.button`
   display: block;
-  width: 100%;
+  width: ${(props) => props.width || "100%"};
   height: ${(props) => (props.height ? props.height : "40px")};
-  margin: 50px 0 30px 0;
-  padding: 10px;
+  margin: ${(props) => props.margin || "50px 0 30px 0"};
+  padding: ${(props) => props.padding || "10px"};
   border-radius: 3px;
   background-color: ${(props) => props.background || "antiquewhite"};
   color: ${(props) => props.color || "black"};
