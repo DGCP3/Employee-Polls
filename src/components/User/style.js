@@ -18,9 +18,8 @@ const Container = styled.div`
   }
 `;
 const Avatar = styled.img`
-  width: 120px;
+  width: ${(prop) => prop.width || "120px"};
   border-radius: 50%;
-  margin-block-end: 10px;
 `;
 const UserDetails = styled.p`
   font-size: 1.2rem;
