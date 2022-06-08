@@ -60,8 +60,8 @@ const BadgeContainer = styled(flex)`
 
 const Badge = styled.span`
   font-weight: normal;
-  color: #000000;
-  background-color: #ffffff;
+  color: #000;
+  background-color: #f3f3f3;
   padding: 5px 10px;
   font-size: 9px !important;
 `;

@@ -3,7 +3,6 @@ import styled from "styled-components";
 const Container = styled.div`
   font-family: "DM mono", monospace;
   min-width: 250px;
-  margin: 10px;
   padding: 10px;
   display: flex;
   justify-content: center;

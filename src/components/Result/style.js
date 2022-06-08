@@ -9,7 +9,6 @@ const Container = styled.div`
   font-size: 1.2rem;
 `;
 const Progressbar = styled.div`
-  width: 100%;
   height: 20px;
   background-color: ${(prop) => prop.color};
   width: ${(prop) => prop.width}%;

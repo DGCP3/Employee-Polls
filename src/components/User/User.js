@@ -10,6 +10,7 @@ export default function User({ user }) {
         )}`}
       />
       <h1>{user?.name}</h1>
+      <span>@{user?.id}</span>
       <UserDetails>
         <Flex>
           <span>Answered :</span>
