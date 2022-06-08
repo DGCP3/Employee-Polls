@@ -21,16 +21,20 @@ function QuestionCard({ question }) {
       <Votes bgColor="#064579">
         {optionOne.votes.length + optionTwo.votes.length} Votes
       </Votes>
+
       <Question to={`${id}`}>
         <p>
           {optionOne.text} or {optionTwo.text}?
         </p>
         <Author name={author} timestamp={timestamp} />
       </Question>
-      <BadgeContainer>
-        {questions.includes(question.id) && <Badge>Asked</Badge>}
-        {answers[question.id] && <Badge>Answered</Badge>}
-      </BadgeContainer>
+
+      {(questions.includes(question.id) || answers[question.id]) && (
+        <BadgeContainer>
+          {questions.includes(question.id) && <Badge>Asked</Badge>}
+          {answers[question.id] && <Badge>Answered</Badge>}
+        </BadgeContainer>
+      )}
     </QuestionContainer>
   );
 }
