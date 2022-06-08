@@ -18,10 +18,9 @@ const Label = styled.label`
   ${Radio}:checked + & {
     font-weight: bold;
     font-size: 1.7rem;
-    /* border-left-style: solid; */
   }
   ${Radio}:checked + &::before {
-    content: "☑️";
+    content: "✔️";
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
