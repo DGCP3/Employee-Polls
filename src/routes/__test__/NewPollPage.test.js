@@ -1,20 +1,6 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 import { render, screen, cleanup, fireEvent } from "@testing-library/react";
-=======
-=======
->>>>>>> d92be24c7fa93c9d9d01e5eb0ab33fb8ad3f34ee
-import {
-  render,
-  screen,
-  cleanup,
-  fireEvent,
-  waitFor,
-} from "@testing-library/react";
-<<<<<<< HEAD
->>>>>>> d92be24c7fa93c9d9d01e5eb0ab33fb8ad3f34ee
-=======
->>>>>>> d92be24c7fa93c9d9d01e5eb0ab33fb8ad3f34ee
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import store from "../../redux/store";
