@@ -30,7 +30,7 @@ export const createQuestion = (options) => {
   };
 };
 
-export const answersQuestion = (_answer) => {
+export const answerQuestion = (_answer) => {
   return async (dispatch, getState) => {
     dispatch(QAloading());
     try {

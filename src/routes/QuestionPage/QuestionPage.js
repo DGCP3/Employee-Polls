@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Author from "../../components/Author";
 import Button from "../../components/Button";
 import InputRadio from "../../components/InputRadio";
 import Result from "../../components/Result";
 import useReduxStore from "../../hooks/useReduxStore";
 import { __getQuestion } from "../../mock-api/api";
-import { Container, Flex, Heading, VoteCounted } from "./style";
+import { Container, VoteCounted } from "./style";
+
 export default function QuestionPage() {
   const { question_id } = useParams();
   const navigate = useNavigate();
@@ -14,11 +15,12 @@ export default function QuestionPage() {
     store: {
       QA: { answers },
     },
-    answersQuestion,
+    answerQuestion,
   } = useReduxStore();
+  const currentAnswer = answers[question_id];
 
   const [question, setQuestion] = useState(null);
-  const [choice, setChoice] = useState(answers?.[question_id]);
+  const [choice, setChoice] = useState(currentAnswer);
 
   const handleChange = (e) => {
     setChoice(e.target.value);
@@ -26,21 +28,27 @@ export default function QuestionPage() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    answersQuestion({ [question_id]: choice });
+    answerQuestion({ [question_id]: choice });
   };
 
   useEffect(() => {
-    __getQuestion(question_id).then((book) => {
-      if (Object.keys(book).length === 0) navigate("/questions");
-      setQuestion(book);
+    __getQuestion(question_id).then((question) => {
+      if (!Object.keys(question).length) navigate("/questions");
+      setQuestion(question);
     });
-  }, [answers.question_id, navigate, question_id]);
+  }, [currentAnswer, navigate, question_id]);
 
   return (
     question && (
       <Container>
-        <Flex>
-          <Heading>Would you rather</Heading>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <h1>Would you rather</h1>
           <Author
             name={question.author}
             timestamp={question.timestamp}
@@ -48,7 +56,7 @@ export default function QuestionPage() {
             fontSize={"1.2rem"}
             seed={question.author}
           />
-        </Flex>
+        </div>
         <form onSubmit={handleSubmit}>
           <InputRadio
             label={question.optionOne.text}
@@ -59,7 +67,7 @@ export default function QuestionPage() {
             onChange={handleChange}
             optColor="green"
           />
-          <h1>Or</h1>
+          <h1 style={{ textAlign: "center" }}>Or</h1>
           <InputRadio
             label={question.optionTwo.text}
             name="options"
@@ -72,7 +80,7 @@ export default function QuestionPage() {
           <Button
             height={"60px"}
             fontSize="1.5rem"
-            disabled={!choice || answers?.[question_id] === choice}
+            disabled={!choice || currentAnswer === choice}
           >
             Vote
           </Button>
