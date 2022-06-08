@@ -10,7 +10,6 @@ const InputRadio = ({
   checked,
   optColor,
 }) => {
-  console.log(optColor);
   return (
     <div style={{ position: "relative" }}>
       <Radio
