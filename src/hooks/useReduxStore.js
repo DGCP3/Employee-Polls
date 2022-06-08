@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { answersQuestion, createQuestion } from "../redux/actions/Q&A_Actions";
+import { answerQuestion, createQuestion } from "../redux/actions/Q&A_Actions";
 import { logout, userLogin } from "../redux/actions/authActions";
 import useBindActions from "./useBindActions";
 import { setFilter } from "../redux/actions/filterActions";
@@ -9,7 +9,7 @@ export default function useReduxStore() {
   const actions = useBindActions({
     userLogin,
     logout,
-    answersQuestion,
+    answerQuestion,
     createQuestion,
     setFilter,
   });
