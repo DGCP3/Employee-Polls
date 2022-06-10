@@ -31,18 +31,21 @@ export const _answerQuestion = async (_userId, _answers, _qid) => {
   const response = await __patchUser(_userId, _answers);
   // patch question data with new answer data
   const question = await __getQuestion(_qid);
+
   if (question.optionOne.votes.includes(_userId)) {
     question.optionOne.votes.splice(
       question.optionOne.votes.indexOf(_userId),
       1
     );
     question.optionTwo.votes.push(_userId);
-  } else {
+  } else if (question.optionTwo.votes.includes(_userId)) {
     question.optionTwo.votes.splice(
       question.optionTwo.votes.indexOf(_userId),
       1
     );
     question.optionOne.votes.push(_userId);
+  } else {
+    question[_answers.answers[_qid]].votes.push(_userId);
   }
   await __patchQuestion(_qid, question);
   return response;
@@ -50,7 +53,7 @@ export const _answerQuestion = async (_userId, _answers, _qid) => {
 
 export const _getLeaderboard = async () => {
   const res = await __getUsers();
-  const status = res.map((user) => {
+  const leaderboard = res.map((user) => {
     return {
       id: user.id,
       name: user.name,
@@ -58,7 +61,7 @@ export const _getLeaderboard = async () => {
       questions: user.questions.length,
     };
   });
-  return status;
+  return leaderboard;
 };
 
 function formatQuestion({ optionOneText, optionTwoText, author }) {
