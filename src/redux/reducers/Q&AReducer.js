@@ -1,4 +1,5 @@
 import {
+  LOG_OUT,
   SET_ANSWERS,
   SET_QA_ERROR,
   SET_QA_LOADING,
@@ -35,6 +36,13 @@ export default function QAreducer(state = initialState, action) {
       };
     case SET_QA_ERROR:
       return { ...state, error: action.payload };
+    case LOG_OUT:
+      return {
+        loading: false,
+        error: false,
+        answers: {},
+        questions: [],
+      };
     default:
       return state;
   }
