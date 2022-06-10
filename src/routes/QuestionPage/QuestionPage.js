@@ -65,7 +65,7 @@ export default function QuestionPage() {
             value="optionOne"
             checked={choice === "optionOne"}
             onChange={handleChange}
-            optColor="green"
+            optColor="#DEFF16"
           />
           <h1 style={{ textAlign: "center" }}>Or</h1>
           <InputRadio
@@ -75,7 +75,7 @@ export default function QuestionPage() {
             value={"optionTwo"}
             checked={choice === "optionTwo"}
             onChange={handleChange}
-            optColor="red"
+            optColor="#FC3D82"
           />
           <Button
             height={"60px"}
