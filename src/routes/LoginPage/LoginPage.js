@@ -1,15 +1,39 @@
-import { Container, PageLayout } from "./styled";
+import { Container, PageLayout, SelectLabel, StyledSelect } from "./styled";
 import InputField from "../../components/InputField";
-import useForm from "../../hooks/useForm";
 import Button from "../../components/Button";
 import useReduxStore from "../../hooks/useReduxStore";
 import { Navigate, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { nanoid } from "nanoid";
+
+const users = {
+  zoshikanlu: {
+    Username: "zoshikanlu",
+    Password: "pass246",
+  },
+  mtsamis: {
+    Username: "mtsamis",
+    Password: "xyz123",
+  },
+  tylermcginnis: {
+    Username: "tylermcginnis",
+    Password: "abc321",
+  },
+  sarahedo: {
+    Username: "sarahedo",
+    Password: "password123",
+  },
+};
 
 const LoginPage = () => {
-  const [form, handleChange, reset] = useForm({
+  const [user, setUser] = useState({
     Username: "zoshikanlu",
     Password: "pass246",
   });
+
+  const onChange = (e) => {
+    setUser(users[e.target.value]);
+  };
 
   const {
     store: {
@@ -23,8 +47,8 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    userLogin(form.Username, form.Password);
-    reset();
+    console.log("fired");
+    userLogin(user.Username, user.Password);
   };
 
   if (isAuth) return <Navigate to={from} replace />;
@@ -34,18 +58,25 @@ const LoginPage = () => {
       <Container>
         <h1>Login to your Account</h1>
         <form onSubmit={handleSubmit} data-testid="loginForm">
-          <InputField
-            label="Username"
-            value={form.Username}
-            onchange={handleChange}
-            height="40px"
-          />
+          <SelectLabel htmlFor="usernames">Username</SelectLabel>
+          <StyledSelect
+            name="Username"
+            id="usernames"
+            value={user.Username}
+            onChange={onChange}
+          >
+            {Object.keys(users).map((username) => (
+              <option key={nanoid()} value={username}>
+                {username}
+              </option>
+            ))}
+          </StyledSelect>
           <InputField
             label="Password"
-            value={form.Password}
-            onchange={handleChange}
             type="password"
+            value={user.Password}
             height="40px"
+            onChange={() => {}}
           />
           <Button height={"50px"} loading={loading} fontSize={"1.5rem"}>
             Login
