@@ -14,7 +14,7 @@ export const _loginUser = async (_username, _password) => {
   return res;
 };
 
-export const _createQuestion = async (_options, _author) => {
+export async function _createQuestion(_options, _author) {
   const formattedQuestion = formatQuestion({
     optionOneText: _options.optionOne,
     optionTwoText: _options.optionTwo,
@@ -24,9 +24,9 @@ export const _createQuestion = async (_options, _author) => {
   const user = await __getUser(_author);
   await __patchUser(user.id, { questions: [...user.questions, res.id] });
   return res;
-};
+}
 
-export const _answerQuestion = async (_userId, _answers, _qid) => {
+export async function _answerQuestion(_userId, _answers, _qid) {
   // patch user data with new answer data
   const response = await __patchUser(_userId, _answers);
   // patch question data with new answer data
@@ -49,9 +49,9 @@ export const _answerQuestion = async (_userId, _answers, _qid) => {
   }
   await __patchQuestion(_qid, question);
   return response;
-};
+}
 
-export const _getLeaderboard = async () => {
+export async function _getLeaderboard() {
   const res = await __getUsers();
   const leaderboard = res.map((user) => {
     return {
@@ -62,7 +62,7 @@ export const _getLeaderboard = async () => {
     };
   });
   return leaderboard;
-};
+}
 
 function formatQuestion({ optionOneText, optionTwoText, author }) {
   return {
