@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import User from "../../components/User";
-import { _getLeaderboard } from "../../mock-api";
+import useReduxStore from "../../hooks/useReduxStore";
 import { Container } from "./style";
 
 export default function Leaderboard() {
-  const [users, setUsers] = useState(null);
+  const {
+    store: { leaderboard },
+    loadLeaderboard,
+  } = useReduxStore();
+
   useEffect(() => {
-    _getLeaderboard().then((res) => {
-      const sorted = res.sort(
-        (a, b) => b.answers + b.questions - (a.answers + a.questions)
-      );
-      setUsers(sorted);
-    });
+    loadLeaderboard();
   }, []);
   return (
     <Container>
-      {users && users.map((user) => <User key={user.id} user={user} />)}
+      {leaderboard &&
+        leaderboard.map((user) => <User key={user.id} user={user} />)}
     </Container>
   );
 }
