@@ -1,15 +1,13 @@
 import { Container, Progressbar } from "./style";
 
 export default function Result({ question }) {
-  const totalVote =
-    question?.optionOne?.votes.length + question?.optionTwo?.votes.length;
-  const optionOnePercentage =
-    (question?.optionOne?.votes.length / totalVote) * 100;
-  const optionTwoPercentage =
-    (question?.optionTwo?.votes.length / totalVote) * 100;
+  const { optionOne, optionTwo } = question;
+  const totalVote = optionOne?.votes.length + optionTwo?.votes.length;
+  const optionOnePercentage = (optionOne?.votes.length / totalVote) * 100;
+  const optionTwoPercentage = (optionTwo?.votes.length / totalVote) * 100;
   return (
     <Container>
-      <div style={{ display: "flex" }}>
+      <div style={{ display: "flex", backgroundColor: "#e6e6e6" }}>
         <Progressbar color="#DEFF16" width={optionOnePercentage} />
         <Progressbar color="#FC3D82" width={optionTwoPercentage} />
       </div>

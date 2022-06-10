@@ -1,13 +1,11 @@
 export const url = "http://localhost:3001";
-const headers = {
-  headers: {
-    "Content-Type": "application/json",
-  },
-};
+
 const fetcher = async (url, method = "GET", data) => {
   return await fetch(url, {
     method,
-    ...headers,
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(data),
   }).then((res) => res.json());
 };
