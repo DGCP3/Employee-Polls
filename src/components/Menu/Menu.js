@@ -1,10 +1,10 @@
 import React from "react";
+import { connect } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import useReduxStore from "../../hooks/useReduxStore";
+import { filterActions } from "../../redux/actions";
 import { Filters, MenuContainer, MenuItem } from "./styled";
 
-const Menu = () => {
-  const { setFilter } = useReduxStore();
+const Menu = ({ setFilter }) => {
   const navigate = useNavigate();
   const handleFilter = (filterBy) => () => {
     setFilter(filterBy);
@@ -23,4 +23,7 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+const mapDispatchToProps = {
+  setFilter: filterActions.setFilter,
+};
+export default connect(null, mapDispatchToProps)(Menu);

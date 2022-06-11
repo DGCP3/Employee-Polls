@@ -1,16 +1,11 @@
 import multiavatar from "@multiavatar/multiavatar";
-import useReduxStore from "../../hooks/useReduxStore";
+import { connect } from "react-redux";
+import { authActions } from "../../redux/actions";
 import Button from "../Button";
 import { Avatar } from "../User/style";
 import { Container, UserInfo } from "./style";
 
-export default function HeaderMenu() {
-  const {
-    store: {
-      auth: { user },
-    },
-    logout,
-  } = useReduxStore();
+function HeaderMenu({ user, logout }) {
   return (
     <Container>
       <Avatar
@@ -35,3 +30,11 @@ export default function HeaderMenu() {
     </Container>
   );
 }
+const mapStateToProps = (state) => ({
+  user: state.auth.user,
+});
+const mapDispatchToProps = {
+  logout: authActions.logout,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderMenu);
