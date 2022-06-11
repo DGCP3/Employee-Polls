@@ -26,7 +26,7 @@ const Flex = styled.div`
   align-items: center;
 `;
 
-const VoteCounted = styled.p`
+const VoteCounted = styled.div`
   font-family: "DM mono", monospace;
   font-size: 1.5rem;
 `;

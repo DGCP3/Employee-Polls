@@ -20,7 +20,7 @@ const Avatar = styled.img`
   width: ${(prop) => prop.width || "120px"};
   border-radius: 50%;
 `;
-const UserDetails = styled.p`
+const UserDetails = styled.div`
   font-size: 1.2rem;
   font-weight: 500;
   width: 100%;
