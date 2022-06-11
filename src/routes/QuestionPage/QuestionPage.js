@@ -33,7 +33,7 @@ export default function QuestionPage() {
 
   useEffect(() => {
     __getQuestion(question_id).then((question) => {
-      if (!Object.keys(question).length) navigate("/questions");
+      if (!Object.keys(question).length) navigate("*");
       setQuestion(question);
     });
   }, [currentAnswer, navigate, question_id]);
