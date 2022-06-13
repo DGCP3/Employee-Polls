@@ -8,8 +8,8 @@ export default function Result({ question }) {
   return (
     <Container>
       <div style={{ display: "flex", backgroundColor: "#e6e6e6" }}>
-        <Progressbar color="#DEFF16" width={optionOnePercentage} />
-        <Progressbar color="#FC3D82" width={optionTwoPercentage} />
+        <Progressbar color="#DEFF16" width={optionOnePercentage || 0} />
+        <Progressbar color="#FC3D82" width={optionTwoPercentage || 0} />
       </div>
       <div
         style={{

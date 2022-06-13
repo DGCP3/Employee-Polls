@@ -46,7 +46,6 @@ describe("Login component", () => {
     expect(optionTwoInput.value).toBe("option two");
 
     fireEvent.click(submitButton);
-    expect(screen.getByRole("heading")).toBeInTheDocument();
     await screen.findByText(/Questions Page/i);
   });
 });
