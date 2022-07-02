@@ -4,7 +4,7 @@ const AuthorStyle = styled.span`
   display: flex;
   align-items: center;
   font-size: ${(props) => props.fontSize || "0.8rem"};
-  color: ${(props) => props.color || "#818181"};
+  color: ${(props) => props.color || "#597790"};
   font-family: "DM Mono";
   font-weight: 500;
 `;
