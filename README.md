@@ -1,4 +1,4 @@
-
+![image](https://i.imgur.com/zwGYQ2u.png)
 # Employee Polls
 
 **login info**  
@@ -51,7 +51,4 @@ or start both
 ```bash
 npm run start-server
 ```
-# Screenshot
-
-![image](https://i.imgur.com/zwGYQ2u.png)
 
